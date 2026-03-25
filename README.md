@@ -1,5 +1,7 @@
 # Paulus Shuffle
 
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE.txt)
+
 A smart classroom seating tool that pairs students fairly every session.
 Avoids repeating pairs from the previous session and ensures at least half of all pairs are mixed-gender.
 
@@ -113,3 +115,6 @@ See the `sample/` folder for example files.
 ## License
 
 This project is licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0).
+See [LICENSE.txt](LICENSE.txt) for the full text.
+
+Copyright (C) 2026 Theodor Billek
