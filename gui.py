@@ -394,4 +394,4 @@ if __name__ == "__main__":
 # Credits
 # This GUI was written by Claude Sonnet 4.6, Anthropic's AI model.
 # Written with Claude Code — Anthropic's official CLI for Claude.
-# Note: Claude only wrote this file; all other code was written by the project author.
+# Note: all other code without this tag was written by the project author.
