@@ -103,3 +103,8 @@ if __name__ == "__main__":
     )
 
     print("Created icon.png and icon.ico")
+
+# Credits
+# This script was written by Claude Sonnet 4.6, Anthropic's AI model.
+# Written with Claude Code — Anthropic's official CLI for Claude.
+# Note: all other code without this tag was written by the project author.
