@@ -104,14 +104,6 @@ See the `sample/` folder for example files.
 
 ---
 
-## Credits
-
-**`SeatingRandomizer.py`**, `sample/input.csv`, and `sample/last_pairs.csv` were created by the project author.
-
-**`gui.py`**, **`create_icon.py`**, **`build.bat`**, and **`README.md`** were written by [Claude Sonnet 4.6](https://www.anthropic.com/claude) (Anthropic's AI assistant).
-
----
-
 ## License
 
 This project is licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0).
@@ -120,6 +112,8 @@ See [LICENSE.txt](LICENSE.txt) for the full text.
 Copyright (C) 2026 Theodor Billek
 
 ---
+
+## Credits
 
 This README was written by **Claude Sonnet 4.6**, Anthropic's AI model.
 
