@@ -390,3 +390,8 @@ class PaulusApp(ctk.CTk):
 if __name__ == "__main__":
     app = PaulusApp()
     app.mainloop()
+
+# Credits
+# This README was written by Claude Sonnet 4.6, Anthropic's AI model.
+# Written with Claude Code — Anthropic's official CLI for Claude.
+# Note: Claude only wrote this README; all code was written by the project author.

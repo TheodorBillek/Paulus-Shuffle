@@ -118,3 +118,9 @@ This project is licensed under the **GNU Affero General Public License v3.0** (A
 See [LICENSE.txt](LICENSE.txt) for the full text.
 
 Copyright (C) 2026 Theodor Billek
+
+---
+
+This README was written by Claude Sonnet 4.6, Anthropic's AI model.
+
+Written with Claude Code — Anthropic's official CLI for Claude. Note: Claude only wrote this README; all code was written by the project author.
