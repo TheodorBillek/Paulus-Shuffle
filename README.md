@@ -121,6 +121,6 @@ Copyright (C) 2026 Theodor Billek
 
 ---
 
-This README was written by Claude Sonnet 4.6, Anthropic's AI model.
+This README was written by **Claude Sonnet 4.6**, Anthropic's AI model.
 
-Written with Claude Code — Anthropic's official CLI for Claude. Note: Claude only wrote this README; all code was written by the project author.
+> _Written with [Claude Code](https://claude.ai/claude-code) — Anthropic's official CLI for Claude. Note: Claude only wrote this README; all code was written by the project author._
