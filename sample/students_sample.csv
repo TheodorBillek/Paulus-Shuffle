@@ -1,0 +1,7 @@
+name,gender,notes,pin_row,pin_col,pin_side,seat_alone,min_row,max_row
+Alice Example,F,,,,,,,
+Bob Example,M,Near front,,,,,0,1
+Carol Example,F,,2,1,L,,,
+Dave Example,M,Solo student,,,,true,,
+Eve Example,X,,,,,,,
+Frank Example,M,Back row only,,,,,2,4

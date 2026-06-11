@@ -1,0 +1,26 @@
+SHUFFLE SERVICE — COMMERCIAL LICENSE
+
+Copyright (C) 2026 Theodor Billek. All rights reserved.
+
+This software is dual-licensed:
+
+  1. Open-Source License (AGPL-3.0)
+     Free to use, modify, and distribute under the terms of the GNU Affero
+     General Public License v3.0 (see LICENSE.txt). Any derivative work or
+     hosted service based on this code must be released under AGPL-3.0.
+
+  2. Commercial License (this document)
+     For use in closed-source products, proprietary SaaS deployments, or
+     any context where you cannot or do not wish to comply with AGPL-3.0,
+     a commercial license is required.
+
+     The commercial license grants you:
+       - Use in proprietary / closed-source software
+       - Deployment as a hosted service without source disclosure
+       - Standard support and update access (per agreement)
+
+     To obtain a commercial license, contact:
+       https://contact.billek.dev
+
+No commercial use is permitted without a signed commercial license agreement.
+This notice does not grant any rights beyond those explicitly stated above.
