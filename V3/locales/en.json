@@ -1,0 +1,113 @@
+{
+  "app_title": "Paulus Shuffle",
+  "app_subtitle": "Classroom Seating",
+
+  "nav_classes": "Classes",
+  "nav_settings": "Settings",
+  "nav_new_class": "New Class",
+
+  "dashboard_welcome": "Welcome to Paulus Shuffle",
+  "dashboard_subtitle": "Select a class from the sidebar to get started.",
+  "dashboard_no_classes": "No classes yet. Create your first class to begin.",
+
+  "tab_seating": "Seating",
+  "tab_students": "Students",
+  "tab_history": "History",
+  "tab_rules": "Rules",
+  "tab_settings": "Settings",
+
+  "btn_generate": "Generate Seating",
+  "btn_generating": "Generating…",
+  "btn_save_pdf": "Save PDF",
+  "btn_add_student": "Add Student",
+  "btn_import_csv": "Import CSV",
+  "btn_add_class": "Create Class",
+  "btn_save": "Save",
+  "btn_cancel": "Cancel",
+  "btn_delete": "Delete",
+  "btn_confirm_delete": "Yes, Delete",
+  "btn_reset_seats": "Reset Layout",
+  "btn_close": "Close",
+  "btn_back": "Back",
+
+  "field_class_name": "Class Name",
+  "field_description": "Description",
+  "field_grid_rows": "Rows",
+  "field_grid_cols": "Tables per Row",
+  "field_student_name": "Name",
+  "field_gender": "Gender",
+  "field_notes": "Notes",
+  "field_session_label": "Session Label (optional)",
+  "field_algorithm": "Mode",
+
+  "gender_m": "Male",
+  "gender_f": "Female",
+  "gender_x": "Other / Unknown",
+
+  "mode_weighted": "Weighted (use preferences)",
+  "mode_random": "Random (ignore weights)",
+
+  "teacher_front": "▲  TEACHER / BLACKBOARD  ▲",
+
+  "seat_empty": "Empty",
+  "seat_disabled": "Disabled",
+  "seat_alone": "Alone",
+
+  "rule_no_repeat": "No Repeat Pairs",
+  "rule_no_repeat_desc": "Prevent students from sitting next to the same partner as last session.",
+  "rule_gender_mixing": "Gender Mixing",
+  "rule_gender_mixing_desc": "At least 50 % of table pairs should be mixed-gender.",
+  "rule_row_progression": "Row Progression",
+  "rule_row_progression_desc": "Students should sit in a different row than last session.",
+  "rule_positional": "Positional Constraints",
+  "rule_positional_desc": "Restrict specific students to certain row ranges.",
+  "rule_vicinity": "Vicinity Separation",
+  "rule_vicinity_desc": "Keep specific students away from each other.",
+  "rule_front_rows_first": "Front Rows First",
+  "rule_front_rows_first_desc": "Fill seats from the front row forward, avoiding empty rows between occupied ones.",
+  "rule_pin_to_seat": "Pin to Seat",
+  "rule_pin_to_seat_desc": "Always assign a student to a specific fixed seat.",
+  "rule_seat_alone": "Always Alone",
+  "rule_seat_alone_desc": "A student always occupies a table alone.",
+  "rule_priority": "Priority",
+  "rule_enabled": "Enabled",
+
+  "weights_position_title": "Seat Preferences",
+  "weights_position_desc": "Set how strongly this student prefers each seat. 0 = avoid, 50 = neutral, 100 = strongly prefer.",
+  "weights_pair_title": "Pair Preferences",
+  "weights_pair_desc": "Set how desirable it is to seat this student next to others.",
+  "weights_reset": "Reset All to Neutral",
+
+  "history_empty": "No sessions recorded yet.",
+  "history_session": "Session",
+  "history_delete_confirm": "Delete this session? This cannot be undone.",
+
+  "confirm_delete_class": "Delete this class and all its data? This cannot be undone.",
+  "confirm_delete_student": "Remove this student from the class?",
+
+  "warning_title": "Warnings",
+  "no_active_students": "No active students in this class.",
+  "import_success": "{imported} students imported, {skipped} skipped.",
+  "import_error": "Import failed. Check your CSV format (name, gender).",
+
+  "settings_language": "Language",
+  "settings_about": "About",
+  "settings_version": "Version 3.0.0",
+  "settings_license": "AGPL-3.0 · © 2026 Theodor Billek",
+
+  "error_generic": "Something went wrong. Please try again.",
+  "error_404": "Not found.",
+  "loading": "Loading…",
+
+  "pdf_visual": "Visual (classroom layout)",
+  "pdf_list": "List (table format)",
+  "pdf_format": "PDF Format",
+
+  "unassigned_students": "Unassigned Students",
+  "drag_hint": "Drag students to seats",
+
+  "class_created": "Class created.",
+  "class_updated": "Class updated.",
+  "student_added": "Student added.",
+  "session_saved": "Session saved."
+}

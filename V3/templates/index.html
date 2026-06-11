@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paulus Shuffle</title>
+  <link rel="stylesheet" href="/static/css/app.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="6" fill="#2563eb"/>
+        <path d="M7 10 C7 10 10 7 14 7 C18 7 21 10 21 10" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M19 8 L21 10 L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M21 18 C21 18 18 21 14 21 C10 21 7 18 7 18" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M9 20 L7 18 L9 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="sidebar-logo-text">Paulus Shuffle</span>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label" data-i18n="nav_classes">Classes</div>
+    <ul class="class-list" id="class-list"></ul>
+    <button class="sidebar-btn" id="btn-new-class">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span data-i18n="nav_new_class">New Class</span>
+    </button>
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+    <button class="sidebar-btn" id="btn-settings-nav">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 1v1M7 12v1M1 7h1M12 7h1M2.5 2.5l.7.7M10.8 10.8l.7.7M2.5 11.5l.7-.7M10.8 3.2l.7-.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span data-i18n="nav_settings">Settings</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ MAIN -->
+<main class="main-content" id="main-content">
+
+  <!-- DASHBOARD VIEW -->
+  <div class="view" id="view-dashboard">
+    <div class="dashboard-hero">
+      <div class="dashboard-icon">
+        <svg width="56" height="56" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="6" fill="#2563eb"/>
+          <path d="M7 10 C7 10 10 7 14 7 C18 7 21 10 21 10" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M19 8 L21 10 L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M21 18 C21 18 18 21 14 21 C10 21 7 18 7 18" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M9 20 L7 18 L9 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+      <h1 data-i18n="dashboard_welcome">Welcome to Paulus Shuffle</h1>
+      <p class="text-sub" data-i18n="dashboard_subtitle">Select a class from the sidebar to get started.</p>
+      <p class="text-sub dashboard-no-classes hidden" id="dashboard-no-classes" data-i18n="dashboard_no_classes"></p>
+    </div>
+  </div>
+
+  <!-- CLASS VIEW -->
+  <div class="view hidden" id="view-class">
+    <div class="class-topbar">
+      <div class="class-topbar-left">
+        <h2 class="class-title" id="class-title">Class Name</h2>
+        <span class="class-subtitle" id="class-subtitle"></span>
+      </div>
+      <div class="class-topbar-right">
+        <button class="btn btn-ghost btn-sm" id="btn-delete-class" title="Delete class">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3h10M5 3V2h4v1M3 3l1 9h6l1-9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" id="class-tabs">
+      <button class="tab active" data-tab="seating" data-i18n="tab_seating">Seating</button>
+      <button class="tab" data-tab="students" data-i18n="tab_students">Students</button>
+      <button class="tab" data-tab="history" data-i18n="tab_history">History</button>
+      <button class="tab" data-tab="rules" data-i18n="tab_rules">Rules</button>
+      <button class="tab" data-tab="class-settings" data-i18n="tab_settings">Settings</button>
+    </div>
+
+    <!-- ── TAB: SEATING ── -->
+    <div class="tab-panel" id="panel-seating">
+      <div class="seating-toolbar">
+        <div class="seating-toolbar-left">
+          <select class="select select-sm" id="select-mode" title="Algorithm mode">
+            <option value="weighted" data-i18n="mode_weighted">Weighted</option>
+            <option value="random" data-i18n="mode_random">Random</option>
+          </select>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-pos-weights" checked />
+            <span>Seat weights</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-pair-weights" checked />
+            <span>Pair weights</span>
+          </label>
+        </div>
+        <div class="seating-toolbar-right">
+          <button class="btn btn-ghost btn-sm" id="btn-pdf-visual">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 1h6l3 3v9H3V1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 1v3h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            PDF
+          </button>
+          <button class="btn btn-primary" id="btn-generate">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7a5 5 0 0 1 5-5 5 5 0 0 1 3.5 1.5L12 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M12 5V1H8" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 7a5 5 0 0 1-5 5 5 5 0 0 1-3.5-1.5L2 13" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M2 9v4h4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="btn_generate">Generate</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Warnings bar -->
+      <div class="warnings-bar hidden" id="warnings-bar">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 13h12L7 1z" stroke="#b45309" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 6v3M7 10.5v.5" stroke="#b45309" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span id="warnings-text"></span>
+      </div>
+
+      <div class="seating-layout">
+        <!-- Grid -->
+        <div class="grid-container">
+          <div class="classroom-grid" id="classroom-grid">
+            <div class="grid-placeholder" data-i18n="btn_generate">Hit Generate to create a seating plan.</div>
+          </div>
+        </div>
+        <!-- Unassigned panel -->
+        <div class="unassigned-panel" id="unassigned-panel">
+          <div class="unassigned-label" data-i18n="unassigned_students">Unassigned</div>
+          <div class="unassigned-list" id="unassigned-list"></div>
+          <div class="drag-hint text-sub" data-i18n="drag_hint">Drag students to seats</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: STUDENTS ── -->
+    <div class="tab-panel hidden" id="panel-students">
+      <div class="panel-toolbar">
+        <button class="btn btn-primary btn-sm" id="btn-add-student">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          <span data-i18n="btn_add_student">Add Student</span>
+        </button>
+        <button class="btn btn-ghost btn-sm" id="btn-import-csv">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 10h9M6.5 2v6M4 6.5l2.5 2.5 2.5-2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-i18n="btn_import_csv">Import CSV</span>
+        </button>
+      </div>
+      <div class="student-list-container">
+        <table class="data-table" id="student-table">
+          <thead>
+            <tr>
+              <th data-i18n="field_student_name">Name</th>
+              <th data-i18n="field_gender">Gender</th>
+              <th data-i18n="field_notes">Notes</th>
+              <th>Weights</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="student-tbody"></tbody>
+        </table>
+      </div>
+      <input type="file" id="csv-file-input" accept=".csv" class="hidden" />
+    </div>
+
+    <!-- ── TAB: HISTORY ── -->
+    <div class="tab-panel hidden" id="panel-history">
+      <div class="history-list" id="history-list"></div>
+    </div>
+
+    <!-- ── TAB: RULES ── -->
+    <div class="tab-panel hidden" id="panel-rules">
+      <div class="rules-list" id="rules-list"></div>
+    </div>
+
+    <!-- ── TAB: CLASS SETTINGS ── -->
+    <div class="tab-panel hidden" id="panel-class-settings">
+      <div class="settings-card">
+        <form id="class-settings-form">
+          <div class="form-row">
+            <label class="form-label" data-i18n="field_class_name">Class Name</label>
+            <input class="input" type="text" id="cs-name" maxlength="100" required />
+          </div>
+          <div class="form-row">
+            <label class="form-label" data-i18n="field_description">Description</label>
+            <input class="input" type="text" id="cs-description" maxlength="200" />
+          </div>
+          <div class="form-row form-row-inline">
+            <div>
+              <label class="form-label" data-i18n="field_grid_rows">Rows</label>
+              <input class="input input-sm" type="number" id="cs-rows" min="1" max="20" />
+            </div>
+            <div>
+              <label class="form-label" data-i18n="field_grid_cols">Tables per Row</label>
+              <input class="input input-sm" type="number" id="cs-cols" min="1" max="10" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit" data-i18n="btn_save">Save</button>
+            <button class="btn btn-ghost" type="button" id="btn-reset-seats" data-i18n="btn_reset_seats">Reset Layout</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP SETTINGS VIEW -->
+  <div class="view hidden" id="view-settings">
+    <div class="view-header">
+      <h2 data-i18n="nav_settings">Settings</h2>
+    </div>
+    <div class="settings-card">
+      <div class="form-row">
+        <label class="form-label" data-i18n="settings_language">Language</label>
+        <select class="select" id="settings-lang">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+    </div>
+    <div class="settings-card settings-about">
+      <div class="about-line" data-i18n="settings_version">Version 3.0.0</div>
+      <div class="about-line text-sub" data-i18n="settings_license">AGPL-3.0 · © 2026 Theodor Billek</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════ MODALS -->
+
+<!-- New / Edit Class Modal -->
+<div class="modal-overlay hidden" id="modal-class">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-class-title">New Class</h3>
+      <button class="modal-close" data-dismiss="modal-class">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="class-form">
+        <div class="form-row">
+          <label class="form-label" data-i18n="field_class_name">Class Name</label>
+          <input class="input" type="text" id="cf-name" maxlength="100" required />
+        </div>
+        <div class="form-row">
+          <label class="form-label" data-i18n="field_description">Description</label>
+          <input class="input" type="text" id="cf-description" maxlength="200" />
+        </div>
+        <div class="form-row form-row-inline">
+          <div>
+            <label class="form-label" data-i18n="field_grid_rows">Rows</label>
+            <input class="input input-sm" type="number" id="cf-rows" min="1" max="20" value="5" />
+          </div>
+          <div>
+            <label class="form-label" data-i18n="field_grid_cols">Tables per Row</label>
+            <input class="input input-sm" type="number" id="cf-cols" min="1" max="10" value="4" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" data-i18n="btn_save">Save</button>
+          <button class="btn btn-ghost" type="button" data-dismiss="modal-class" data-i18n="btn_cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Add Student Modal -->
+<div class="modal-overlay hidden" id="modal-student">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 data-i18n="btn_add_student">Add Student</h3>
+      <button class="modal-close" data-dismiss="modal-student">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="student-form">
+        <div class="form-row">
+          <label class="form-label" data-i18n="field_student_name">Name</label>
+          <input class="input" type="text" id="sf-name" maxlength="100" required />
+        </div>
+        <div class="form-row">
+          <label class="form-label" data-i18n="field_gender">Gender</label>
+          <select class="select" id="sf-gender">
+            <option value="M" data-i18n="gender_m">Male</option>
+            <option value="F" data-i18n="gender_f">Female</option>
+            <option value="X" data-i18n="gender_x" selected>Other / Unknown</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" data-i18n="field_notes">Notes</label>
+          <input class="input" type="text" id="sf-notes" maxlength="200" />
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" data-i18n="btn_save">Save</button>
+          <button class="btn btn-ghost" type="button" data-dismiss="modal-student" data-i18n="btn_cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Weight Editor Modal -->
+<div class="modal-overlay hidden" id="modal-weights">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h3 id="modal-weights-title">Preferences</h3>
+      <button class="modal-close" data-dismiss="modal-weights">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="weights-tabs">
+        <button class="weights-tab active" id="wtab-position" data-wtab="position">
+          <span data-i18n="weights_position_title">Seat Preferences</span>
+        </button>
+        <button class="weights-tab" id="wtab-pair" data-wtab="pair">
+          <span data-i18n="weights_pair_title">Pair Preferences</span>
+        </button>
+      </div>
+
+      <div id="wpanel-position">
+        <p class="text-sub form-row" data-i18n="weights_position_desc"></p>
+        <div class="weight-grid-container" id="weight-seat-grid"></div>
+        <div class="form-actions">
+          <button class="btn btn-ghost btn-sm" id="btn-reset-pos-weights" data-i18n="weights_reset">Reset All</button>
+          <button class="btn btn-primary" id="btn-save-pos-weights" data-i18n="btn_save">Save</button>
+        </div>
+      </div>
+
+      <div id="wpanel-pair" class="hidden">
+        <p class="text-sub form-row" data-i18n="weights_pair_desc"></p>
+        <div class="pair-weights-list" id="pair-weights-list"></div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="btn-save-pair-weights" data-i18n="btn_save">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal-overlay hidden" id="modal-confirm">
+  <div class="modal modal-sm">
+    <div class="modal-header">
+      <h3 id="confirm-title">Confirm</h3>
+      <button class="modal-close" data-dismiss="modal-confirm">✕</button>
+    </div>
+    <div class="modal-body">
+      <p id="confirm-message"></p>
+      <div class="form-actions">
+        <button class="btn btn-danger" id="btn-confirm-ok" data-i18n="btn_confirm_delete">Delete</button>
+        <button class="btn btn-ghost" data-dismiss="modal-confirm" data-i18n="btn_cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notifications -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="/static/js/i18n.js"></script>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/grid.js"></script>
+<script src="/static/js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+{
+  "app_title": "Paulus Shuffle",
+  "app_subtitle": "Sitzplatz-Verwaltung",
+
+  "nav_classes": "Klassen",
+  "nav_settings": "Einstellungen",
+  "nav_new_class": "Neue Klasse",
+
+  "dashboard_welcome": "Willkommen bei Paulus Shuffle",
+  "dashboard_subtitle": "Wähle links eine Klasse aus, um zu beginnen.",
+  "dashboard_no_classes": "Noch keine Klassen. Erstelle deine erste Klasse.",
+
+  "tab_seating": "Sitzplan",
+  "tab_students": "Schüler",
+  "tab_history": "Verlauf",
+  "tab_rules": "Regeln",
+  "tab_settings": "Einstellungen",
+
+  "btn_generate": "Sitzplan generieren",
+  "btn_generating": "Generiere…",
+  "btn_save_pdf": "PDF speichern",
+  "btn_add_student": "Schüler hinzufügen",
+  "btn_import_csv": "CSV importieren",
+  "btn_add_class": "Klasse erstellen",
+  "btn_save": "Speichern",
+  "btn_cancel": "Abbrechen",
+  "btn_delete": "Löschen",
+  "btn_confirm_delete": "Ja, löschen",
+  "btn_reset_seats": "Layout zurücksetzen",
+  "btn_close": "Schließen",
+  "btn_back": "Zurück",
+
+  "field_class_name": "Klassenname",
+  "field_description": "Beschreibung",
+  "field_grid_rows": "Reihen",
+  "field_grid_cols": "Tische pro Reihe",
+  "field_student_name": "Name",
+  "field_gender": "Geschlecht",
+  "field_notes": "Notizen",
+  "field_session_label": "Sitzungsbezeichnung (optional)",
+  "field_algorithm": "Modus",
+
+  "gender_m": "Männlich",
+  "gender_f": "Weiblich",
+  "gender_x": "Sonstiges / Unbekannt",
+
+  "mode_weighted": "Gewichtet (Präferenzen nutzen)",
+  "mode_random": "Zufällig (Gewichte ignorieren)",
+
+  "teacher_front": "▲  LEHRER / TAFEL  ▲",
+
+  "seat_empty": "Leer",
+  "seat_disabled": "Deaktiviert",
+  "seat_alone": "Allein",
+
+  "rule_no_repeat": "Keine Wiederholung",
+  "rule_no_repeat_desc": "Verhindert, dass Schüler wieder neben demselben Nachbarn sitzen.",
+  "rule_gender_mixing": "Geschlechtermischung",
+  "rule_gender_mixing_desc": "Mindestens 50 % der Tischpaare sollen gemischtgeschlechtlich sein.",
+  "rule_row_progression": "Reihenwechsel",
+  "rule_row_progression_desc": "Schüler sollen in einer anderen Reihe als letztes Mal sitzen.",
+  "rule_positional": "Positionsbeschränkung",
+  "rule_positional_desc": "Bestimmte Schüler auf bestimmte Reihen beschränken.",
+  "rule_vicinity": "Abstandsregel",
+  "rule_vicinity_desc": "Bestimmte Schüler voneinander fernhalten.",
+  "rule_front_rows_first": "Vordere Reihen zuerst",
+  "rule_front_rows_first_desc": "Plätze werden von vorne nach hinten belegt; leere Reihen zwischen belegten werden vermieden.",
+  "rule_pin_to_seat": "Fester Sitzplatz",
+  "rule_pin_to_seat_desc": "Einem Schüler immer denselben Platz zuweisen.",
+  "rule_seat_alone": "Immer allein",
+  "rule_seat_alone_desc": "Ein Schüler sitzt immer allein an einem Tisch.",
+  "rule_priority": "Priorität",
+  "rule_enabled": "Aktiviert",
+
+  "weights_position_title": "Sitzplatz-Präferenzen",
+  "weights_position_desc": "Stelle ein, wie stark dieser Schüler jeden Sitzplatz bevorzugt. 0 = vermeiden, 50 = neutral, 100 = stark bevorzugen.",
+  "weights_pair_title": "Nachbar-Präferenzen",
+  "weights_pair_desc": "Lege fest, wie wünschenswert es ist, diesen Schüler neben anderen zu platzieren.",
+  "weights_reset": "Alle auf Neutral zurücksetzen",
+
+  "history_empty": "Noch keine Sitzungen gespeichert.",
+  "history_session": "Sitzung",
+  "history_delete_confirm": "Diese Sitzung löschen? Dies kann nicht rückgängig gemacht werden.",
+
+  "confirm_delete_class": "Diese Klasse und alle Daten löschen? Dies kann nicht rückgängig gemacht werden.",
+  "confirm_delete_student": "Diesen Schüler aus der Klasse entfernen?",
+
+  "warning_title": "Warnungen",
+  "no_active_students": "Keine aktiven Schüler in dieser Klasse.",
+  "import_success": "{imported} Schüler importiert, {skipped} übersprungen.",
+  "import_error": "Import fehlgeschlagen. Bitte CSV-Format prüfen (Name, Geschlecht).",
+
+  "settings_language": "Sprache",
+  "settings_about": "Über",
+  "settings_version": "Version 3.0.0",
+  "settings_license": "AGPL-3.0 · © 2026 Theodor Billek",
+
+  "error_generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+  "error_404": "Nicht gefunden.",
+  "loading": "Laden…",
+
+  "pdf_visual": "Visuell (Klassenzimmer-Layout)",
+  "pdf_list": "Liste (Tabellenformat)",
+  "pdf_format": "PDF-Format",
+
+  "unassigned_students": "Nicht zugewiesene Schüler",
+  "drag_hint": "Schüler auf Plätze ziehen",
+
+  "class_created": "Klasse erstellt.",
+  "class_updated": "Klasse aktualisiert.",
+  "student_added": "Schüler hinzugefügt.",
+  "session_saved": "Sitzung gespeichert."
+}

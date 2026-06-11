@@ -1,0 +1,249 @@
+from __future__ import annotations
+import io
+from datetime import datetime
+from typing import Dict, List, Optional
+
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4, landscape
+from reportlab.lib.units import cm, mm
+from reportlab.pdfgen import canvas as rl_canvas
+from reportlab.platypus import (
+    SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer,
+)
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_CENTER, TA_LEFT
+
+# Colour palette — matches the web UI
+_BLUE   = colors.HexColor("#2563eb")
+_SLATE  = colors.HexColor("#1e293b")
+_LIGHT  = colors.HexColor("#f1f5f9")
+_BORDER = colors.HexColor("#e2e8f0")
+_WHITE  = colors.white
+_TEXT   = colors.HexColor("#0f172a")
+_SUB    = colors.HexColor("#64748b")
+_M      = colors.HexColor("#dbeafe")   # male chip
+_F      = colors.HexColor("#fce7f3")   # female chip
+_X      = colors.HexColor("#f1f5f9")   # neutral chip
+
+
+def _gender_color(gender: str) -> object:
+    return {"M": _M, "F": _F}.get(gender, _X)
+
+
+def generate_pdf(
+    *,
+    class_name: str,
+    session_label: str,
+    session_date: str,
+    students_by_id: Dict[int, dict],
+    seats_by_id: Dict[int, dict],
+    assignment: Dict[int, int],
+    grid_rows: int,
+    grid_cols: int,
+    warnings: List[str],
+    fmt: str = "visual",  # "visual" | "list"
+) -> bytes:
+    buf = io.BytesIO()
+    if fmt == "list":
+        _build_list_pdf(buf, class_name, session_label, session_date, students_by_id, seats_by_id, assignment, warnings)
+    else:
+        _build_visual_pdf(buf, class_name, session_label, session_date, students_by_id, seats_by_id, assignment, grid_rows, grid_cols, warnings)
+    return buf.getvalue()
+
+
+# ---------------------------------------------------------------------------
+# Visual PDF — draws the classroom as a grid of desks
+# ---------------------------------------------------------------------------
+
+def _build_visual_pdf(buf, class_name, session_label, session_date, students_by_id, seats_by_id, assignment, grid_rows, grid_cols, warnings):
+    page_w, page_h = landscape(A4)
+    c = rl_canvas.Canvas(buf, pagesize=landscape(A4))
+
+    margin = 1.5 * cm
+    usable_w = page_w - 2 * margin
+    usable_h = page_h - 2 * margin
+
+    # Header
+    c.setFillColor(_SLATE)
+    c.rect(0, page_h - 2 * cm, page_w, 2 * cm, fill=1, stroke=0)
+    c.setFillColor(_WHITE)
+    c.setFont("Helvetica-Bold", 13)
+    title = class_name
+    if session_label:
+        title += f"  ·  {session_label}"
+    c.drawString(margin, page_h - 1.35 * cm, title)
+    c.setFont("Helvetica", 9)
+    c.drawRightString(page_w - margin, page_h - 1.35 * cm, session_date)
+
+    # Teacher label at top
+    teacher_h = 1.2 * cm
+    teacher_y = page_h - 2 * cm - 0.4 * cm - teacher_h
+    c.setFillColor(_BLUE)
+    c.setStrokeColor(_BLUE)
+    c.roundRect(margin, teacher_y, usable_w, teacher_h, 4, fill=1, stroke=0)
+    c.setFillColor(_WHITE)
+    c.setFont("Helvetica-Bold", 9)
+    c.drawCentredString(page_w / 2, teacher_y + teacher_h / 2 - 4, "▲  TEACHER / BLACKBOARD  ▲")
+
+    # Grid
+    reverse = {v: k for k, v in assignment.items()}
+    table_w = (usable_w - (grid_cols - 1) * 0.3 * cm) / grid_cols
+    table_h = 1.6 * cm
+    row_gap = 0.5 * cm
+
+    grid_top = teacher_y - 0.6 * cm
+
+    for row_idx in range(grid_rows):
+        row_y = grid_top - row_idx * (table_h + row_gap) - table_h
+        if row_y < margin:
+            break
+        for col_idx in range(grid_cols):
+            tx = margin + col_idx * (table_w + 0.3 * cm)
+            # Draw table background
+            c.setFillColor(_LIGHT)
+            c.setStrokeColor(_BORDER)
+            c.setLineWidth(0.5)
+            c.roundRect(tx, row_y, table_w, table_h, 3, fill=1, stroke=1)
+
+            # Left seat
+            _draw_seat_cell(c, seats_by_id, reverse, students_by_id, row_idx, col_idx, "L", tx, row_y, table_w / 2, table_h)
+            # Divider
+            c.setStrokeColor(_BORDER)
+            c.setLineWidth(0.4)
+            c.line(tx + table_w / 2, row_y + 2, tx + table_w / 2, row_y + table_h - 2)
+            # Right seat
+            _draw_seat_cell(c, seats_by_id, reverse, students_by_id, row_idx, col_idx, "R", tx + table_w / 2, row_y, table_w / 2, table_h)
+
+    # Row numbers on left margin
+    for row_idx in range(grid_rows):
+        row_y = grid_top - row_idx * (table_h + row_gap) - table_h
+        if row_y < margin:
+            break
+        c.setFillColor(_SUB)
+        c.setFont("Helvetica", 7)
+        c.drawRightString(margin - 3, row_y + table_h / 2 - 3, str(row_idx + 1))
+
+    # Warnings
+    if warnings:
+        warn_y = margin
+        c.setFont("Helvetica", 7)
+        c.setFillColor(colors.HexColor("#b45309"))
+        text = "  ⚠  " + "   ·   ".join(warnings[:4])
+        c.drawString(margin, warn_y, text)
+
+    # Footer
+    c.setFillColor(_SUB)
+    c.setFont("Helvetica", 7)
+    c.drawRightString(page_w - margin, margin, f"Generated by Paulus Shuffle V3 · {session_date}")
+
+    c.save()
+
+
+def _draw_seat_cell(c, seats_by_id, reverse, students_by_id, row_idx, col_idx, side, x, y, w, h):
+    seat = _find_seat(seats_by_id, row_idx, col_idx, side)
+    if seat is None or not seat["is_active"]:
+        c.setFillColor(colors.HexColor("#f8fafc"))
+        c.setStrokeColor(colors.transparent)
+        c.rect(x, y, w, h, fill=1, stroke=0)
+        return
+
+    student_id = reverse.get(seat["id"])
+    if student_id is None:
+        return
+
+    student = students_by_id.get(student_id)
+    if student is None:
+        return
+
+    gender = student.get("gender", "X")
+    chip_color = _gender_color(gender)
+
+    # Chip background
+    pad = 3
+    c.setFillColor(chip_color)
+    c.setStrokeColor(colors.transparent)
+    c.roundRect(x + pad, y + pad, w - 2 * pad, h - 2 * pad, 2, fill=1, stroke=0)
+
+    # Name
+    c.setFillColor(_TEXT)
+    c.setFont("Helvetica-Bold", 7.5)
+    name = student["name"]
+    max_chars = int(w / 5.5)
+    if len(name) > max_chars:
+        name = name[: max_chars - 1] + "…"
+    c.drawCentredString(x + w / 2, y + h / 2 - 3.5, name)
+
+    # Gender tag
+    c.setFont("Helvetica", 6)
+    c.setFillColor(_SUB)
+    c.drawCentredString(x + w / 2, y + 4, gender)
+
+
+def _find_seat(seats_by_id, row_idx, col_idx, side):
+    for seat in seats_by_id.values():
+        if seat["row_idx"] == row_idx and seat["col_idx"] == col_idx and seat["side"] == side:
+            return seat
+    return None
+
+
+# ---------------------------------------------------------------------------
+# List PDF — pairs formatted in a table
+# ---------------------------------------------------------------------------
+
+def _build_list_pdf(buf, class_name, session_label, session_date, students_by_id, seats_by_id, assignment, warnings):
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle("title", fontSize=16, fontName="Helvetica-Bold", textColor=_SLATE, spaceAfter=4)
+    sub_style   = ParagraphStyle("sub",   fontSize=10, fontName="Helvetica",     textColor=_SUB,   spaceAfter=16)
+    warn_style  = ParagraphStyle("warn",  fontSize=8,  fontName="Helvetica",     textColor=colors.HexColor("#b45309"))
+
+    doc = SimpleDocTemplate(buf, pagesize=A4, leftMargin=2*cm, rightMargin=2*cm, topMargin=2*cm, bottomMargin=2*cm)
+
+    # Build pairs from table assignments
+    reverse = {v: k for k, v in assignment.items()}
+    tables: Dict = {}
+    for seat in seats_by_id.values():
+        if not seat["is_active"]:
+            continue
+        key = (seat["row_idx"], seat["col_idx"])
+        tables.setdefault(key, {})[seat["side"]] = seat["id"]
+
+    rows = [["Row", "Table", "Left Seat", "Right Seat"]]
+    for (row_idx, col_idx), sides in sorted(tables.items()):
+        seat_l = sides.get("L")
+        seat_r = sides.get("R")
+        s1 = students_by_id.get(reverse.get(seat_l)) if seat_l else None
+        s2 = students_by_id.get(reverse.get(seat_r)) if seat_r else None
+        rows.append([
+            str(row_idx + 1),
+            str(col_idx + 1),
+            f"{s1['name']} ({s1['gender']})" if s1 else "—",
+            f"{s2['name']} ({s2['gender']})" if s2 else "—",
+        ])
+
+    table = Table(rows, colWidths=[2*cm, 2*cm, 8*cm, 8*cm])
+    table.setStyle(TableStyle([
+        ("BACKGROUND",   (0,0), (-1,0), _SLATE),
+        ("TEXTCOLOR",    (0,0), (-1,0), _WHITE),
+        ("FONTNAME",     (0,0), (-1,0), "Helvetica-Bold"),
+        ("FONTSIZE",     (0,0), (-1,0), 9),
+        ("ALIGN",        (0,0), (-1,-1), "LEFT"),
+        ("FONTNAME",     (0,1), (-1,-1), "Helvetica"),
+        ("FONTSIZE",     (0,1), (-1,-1), 9),
+        ("ROWBACKGROUNDS",(0,1), (-1,-1), [_WHITE, _LIGHT]),
+        ("GRID",         (0,0), (-1,-1), 0.4, _BORDER),
+        ("TOPPADDING",   (0,0), (-1,-1), 5),
+        ("BOTTOMPADDING",(0,0), (-1,-1), 5),
+    ]))
+
+    label = f"{class_name}  ·  {session_label}" if session_label else class_name
+    story = [
+        Paragraph(label, title_style),
+        Paragraph(session_date, sub_style),
+        table,
+    ]
+    if warnings:
+        story.append(Spacer(1, 0.4*cm))
+        for w in warnings:
+            story.append(Paragraph(f"⚠ {w}", warn_style))
+
+    doc.build(story)

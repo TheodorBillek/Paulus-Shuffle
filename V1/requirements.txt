@@ -1,0 +1,5 @@
+customtkinter>=5.2.0
+pillow>=10.0.0
+
+# Build-only (not needed to run the app)
+# pyinstaller>=6.0.0

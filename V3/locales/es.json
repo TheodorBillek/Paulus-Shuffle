@@ -1,0 +1,113 @@
+{
+  "app_title": "Paulus Shuffle",
+  "app_subtitle": "Distribución de Asientos",
+
+  "nav_classes": "Clases",
+  "nav_settings": "Ajustes",
+  "nav_new_class": "Nueva Clase",
+
+  "dashboard_welcome": "Bienvenido a Paulus Shuffle",
+  "dashboard_subtitle": "Selecciona una clase en la barra lateral para comenzar.",
+  "dashboard_no_classes": "Sin clases aún. Crea tu primera clase.",
+
+  "tab_seating": "Distribución",
+  "tab_students": "Alumnos",
+  "tab_history": "Historial",
+  "tab_rules": "Reglas",
+  "tab_settings": "Ajustes",
+
+  "btn_generate": "Generar Distribución",
+  "btn_generating": "Generando…",
+  "btn_save_pdf": "Guardar PDF",
+  "btn_add_student": "Añadir Alumno",
+  "btn_import_csv": "Importar CSV",
+  "btn_add_class": "Crear Clase",
+  "btn_save": "Guardar",
+  "btn_cancel": "Cancelar",
+  "btn_delete": "Eliminar",
+  "btn_confirm_delete": "Sí, eliminar",
+  "btn_reset_seats": "Restablecer diseño",
+  "btn_close": "Cerrar",
+  "btn_back": "Volver",
+
+  "field_class_name": "Nombre de la Clase",
+  "field_description": "Descripción",
+  "field_grid_rows": "Filas",
+  "field_grid_cols": "Mesas por fila",
+  "field_student_name": "Nombre",
+  "field_gender": "Género",
+  "field_notes": "Notas",
+  "field_session_label": "Etiqueta de sesión (opcional)",
+  "field_algorithm": "Modo",
+
+  "gender_m": "Masculino",
+  "gender_f": "Femenino",
+  "gender_x": "Otro / Desconocido",
+
+  "mode_weighted": "Ponderado (usar preferencias)",
+  "mode_random": "Aleatorio (ignorar pesos)",
+
+  "teacher_front": "▲  PROFESOR / PIZARRA  ▲",
+
+  "seat_empty": "Vacío",
+  "seat_disabled": "Desactivado",
+  "seat_alone": "Solo",
+
+  "rule_no_repeat": "Sin Repetición de Parejas",
+  "rule_no_repeat_desc": "Evita que los alumnos se sienten junto al mismo compañero que en la sesión anterior.",
+  "rule_gender_mixing": "Mezcla de Géneros",
+  "rule_gender_mixing_desc": "Al menos el 50 % de las parejas de mesa deben ser mixtas.",
+  "rule_row_progression": "Progresión de Fila",
+  "rule_row_progression_desc": "Los alumnos deben sentarse en una fila diferente a la de la última sesión.",
+  "rule_positional": "Restricciones de Posición",
+  "rule_positional_desc": "Limitar alumnos específicos a rangos de fila determinados.",
+  "rule_vicinity": "Separación por Proximidad",
+  "rule_vicinity_desc": "Mantener a ciertos alumnos alejados entre sí.",
+  "rule_front_rows_first": "Filas delanteras primero",
+  "rule_front_rows_first_desc": "Los asientos se asignan de adelante hacia atrás; se evitan filas vacías entre filas ocupadas.",
+  "rule_pin_to_seat": "Asiento Fijo",
+  "rule_pin_to_seat_desc": "Asignar siempre a un alumno a un asiento específico.",
+  "rule_seat_alone": "Siempre Solo",
+  "rule_seat_alone_desc": "Un alumno siempre ocupa una mesa solo.",
+  "rule_priority": "Prioridad",
+  "rule_enabled": "Activado",
+
+  "weights_position_title": "Preferencias de Asiento",
+  "weights_position_desc": "Define cuánto prefiere este alumno cada asiento. 0 = evitar, 50 = neutral, 100 = preferir mucho.",
+  "weights_pair_title": "Preferencias de Compañero",
+  "weights_pair_desc": "Define lo deseable que es sentar a este alumno junto a otros.",
+  "weights_reset": "Restablecer todo a Neutral",
+
+  "history_empty": "Aún no hay sesiones registradas.",
+  "history_session": "Sesión",
+  "history_delete_confirm": "¿Eliminar esta sesión? Esta acción no se puede deshacer.",
+
+  "confirm_delete_class": "¿Eliminar esta clase y todos sus datos? Esta acción no se puede deshacer.",
+  "confirm_delete_student": "¿Eliminar este alumno de la clase?",
+
+  "warning_title": "Advertencias",
+  "no_active_students": "No hay alumnos activos en esta clase.",
+  "import_success": "{imported} alumnos importados, {skipped} omitidos.",
+  "import_error": "Error al importar. Comprueba el formato CSV (nombre, género).",
+
+  "settings_language": "Idioma",
+  "settings_about": "Acerca de",
+  "settings_version": "Versión 3.0.0",
+  "settings_license": "AGPL-3.0 · © 2026 Theodor Billek",
+
+  "error_generic": "Algo salió mal. Por favor, inténtalo de nuevo.",
+  "error_404": "No encontrado.",
+  "loading": "Cargando…",
+
+  "pdf_visual": "Visual (plano del aula)",
+  "pdf_list": "Lista (formato de tabla)",
+  "pdf_format": "Formato PDF",
+
+  "unassigned_students": "Alumnos sin asignar",
+  "drag_hint": "Arrastra alumnos a sus asientos",
+
+  "class_created": "Clase creada.",
+  "class_updated": "Clase actualizada.",
+  "student_added": "Alumno añadido.",
+  "session_saved": "Sesión guardada."
+}
